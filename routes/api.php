@@ -25,6 +25,7 @@ Route::post('/login', [AuthenticationController::class,'login']);
 
 //Authenticated Routes
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/logout', [AuthenticationController::class,'signout']);
     Route::post('/author', [AuthorController::class,'store']);
     Route::post('/book', [BookController::class,'store']);
 });

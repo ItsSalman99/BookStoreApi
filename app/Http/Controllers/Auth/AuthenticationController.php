@@ -66,4 +66,16 @@ class AuthenticationController extends Controller
         ]);
 
     }
+
+    public function signout()
+    {
+        auth()->user()->tokens()->delete();
+        
+        return response()->json(
+            [
+                'message' => 'Signed Out!'
+            ]
+        ); 
+    }
+
 }
