@@ -35,5 +35,35 @@ class AuthenticationController extends Controller
 
     }
 
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        
+        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => 'Unauthenticated!'
+            ]);
+        }
 
+        $user = User::where('email', $request->email)->first();
+
+        if (!Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'status_code' => 500,
+                'message' => 'Error in login !'
+            ]);
+        }
+
+        $token = $user->createToken('authToken')->plainTextToken;
+
+        return response()->json([
+            'status_code' => 200,
+            'login_token' => $token,
+        ]);
+
+    }
 }

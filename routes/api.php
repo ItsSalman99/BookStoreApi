@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/authors', [AuthorController::class,'index']);
 Route::get('/books', [BookController::class,'index']);
 Route::post('/register', [AuthenticationController::class,'register']);
+Route::post('/login', [AuthenticationController::class,'login']);
+
 //Authenticated Routes
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/author', [AuthorController::class,'store']);
