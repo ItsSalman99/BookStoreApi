@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use Illuminate\Http\Request;
@@ -16,8 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+//UnAuthencated Routes
 Route::get('/authors', [AuthorController::class,'index']);
-Route::post('/author', [AuthorController::class,'store']);
 Route::get('/books', [BookController::class,'index']);
-Route::post('/book', [BookController::class,'store']);
+
+//Authenticated Routes
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/author', [AuthorController::class,'store']);
+    Route::post('/book', [BookController::class,'store']);
+});
