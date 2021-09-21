@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 //UnAuthencated Routes
 Route::get('/authors', [AuthorController::class,'index']);
 Route::get('/books', [BookController::class,'index']);
-
+Route::post('/register', [AuthenticationController::class,'register']);
 //Authenticated Routes
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/author', [AuthorController::class,'store']);
