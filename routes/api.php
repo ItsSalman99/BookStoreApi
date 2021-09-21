@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
 Route::get('/authors', [AuthorController::class,'index']);
 Route::post('/author', [AuthorController::class,'store']);
-
+Route::get('/books', [BookController::class,'index']);
+Route::post('/book', [BookController::class,'store']);
